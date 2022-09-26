@@ -1,32 +1,24 @@
-import React from "react";
 import { render } from "react-dom";
-const Pet = (obj) => {
-  return React.createElement("div", {}, [
-    React.createElement("h1", {}, obj.name),
-    React.createElement("h2", {}, obj.animal),
-    React.createElement("h2", {}, obj.breed),
-  ]);
-};
-
+import SearchParams from "./SearchParams";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { StrictMode } from "react";
+import Details from "./Details";
 const App = () => {
-  return React.createElement("div", { id: "idk" }, [
-    React.createElement("h1", {}, "Adopt Me!"),
-    React.createElement(Pet, {
-      name: "Luna",
-      animal: "dog",
-      breed: "havanese",
-    }),
-    React.createElement(Pet, {
-      name: "Pepper",
-      anima: "Bird",
-      breed: "Cockatiel",
-    }),
-    React.createElement(Pet, {
-      name: "Doink",
-      animal: "Cat",
-      breed: "Mix",
-    }),
-  ]);
+  return (
+    <StrictMode>
+      <div>
+        <BrowserRouter>
+          <header>
+            <Link to="/">Adopt Me!</Link>
+          </header>
+          <Routes>
+            <Route path="/Details/:id" element={<Details />} />
+            <Route path="/" element={<SearchParams />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </StrictMode>
+  );
 };
 
-render(React.createElement(App), document.getElementById("root"));
+render(<App />, document.getElementById("root"));
